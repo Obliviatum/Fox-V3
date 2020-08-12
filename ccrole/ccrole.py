@@ -405,7 +405,7 @@ class CCRole(commands.Cog):
                 await message.channel.send("Permission error: Unable to remove roles")
 
         out_message = self.format_cc(cmd, message, target)
-        await message.channel.send(out_message)
+        return await message.channel.send(out_message)
 
     def format_cc(self, cmd, message, target):
         out = cmd["text"]
