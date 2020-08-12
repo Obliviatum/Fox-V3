@@ -269,9 +269,15 @@ class CCRole(commands.Cog):
         if cmd is not None:
             resp = await self.eval_cc(cmd, message, ctx)
             
-        if resp not None:
-            await resp.delete()
-        await ctx.message.delete()
+        if resp:
+            try:
+                await resp.delete()
+            except:
+                pass
+        try:
+            await ctx.message.delete()
+        except:
+            pass
 
     # @commands.Cog.listener()
     # async def on_message(self, message: discord.Message):
