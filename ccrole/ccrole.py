@@ -267,7 +267,11 @@ class CCRole(commands.Cog):
         cmd = await cmdlist.get_raw(cmd, default=None)
 
         if cmd is not None:
-            await self.eval_cc(cmd, message, ctx)
+            resp = await self.eval_cc(cmd, message, ctx)
+            
+        if resp not None:
+            await resp.delete()
+        await ctx.message.delete()
 
     # @commands.Cog.listener()
     # async def on_message(self, message: discord.Message):
@@ -369,8 +373,7 @@ class CCRole(commands.Cog):
                 out_message = "This custom command is targeted! @mention a target\n`{} <target>`".format(
                     ctx.invoked_with
                 )
-                await message.channel.send(out_message)
-                return
+                return await message.channel.send(out_message)
         else:
             target = message.author
 
